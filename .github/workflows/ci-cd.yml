@@ -1,0 +1,36 @@
+
+name: NodeJS CI/CD Pipeline
+
+# Trigger pipeline whenever code is pushed
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout source code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup NodeJS
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      - name: Run Tests
+        run: npm test
+
+      # Step 5: Build application
+      - name: Build Application
+        run: npm run build
